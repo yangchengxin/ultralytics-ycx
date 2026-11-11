@@ -19,10 +19,8 @@ ENV PYTHONUNBUFFERED=1 \
     TF_CPP_MIN_LOG_LEVEL=3 \
     TORCH_CPP_LOG_LEVEL=ERROR
 
-# Downloads to user config dir
-ADD https://github.com/ultralytics/assets/releases/download/v0.0.0/Arial.ttf \
-    https://github.com/ultralytics/assets/releases/download/v0.0.0/Arial.Unicode.ttf \
-    /root/.config/Ultralytics/
+# Create user config dir (fonts are optional; Ultralytics falls back to Pillow's default font if absent)
+RUN mkdir -p /root/.config/Ultralytics
 
 # Install linux packages
 # gnupg required for Edge TPU install
@@ -40,11 +38,17 @@ WORKDIR /ultralytics
 COPY . .
 RUN sed -i '/^\[http "https:\/\/github\.com\/"\]/,+1d' .git/config && \
     sed -i'' -e 's/"opencv-python/"opencv-python-headless/' pyproject.toml
-ADD https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt .
+COPY weights/yolo26n.pt .
 
-# Install pip packages (uv already installed in base image)
-RUN uv pip install --system --no-cache -e "." albumentations faster-coco-eval && \
-    rm -rf tmp /root/.config/Ultralytics/persistent_cache.json
+# # Install pip packages (uv already installed in base image)
+# RUN uv pip install --system --no-cache -e "." albumentations faster-coco-eval && \
+#     rm -rf tmp /root/.config/Ultralytics/persistent_cache.json
+
+ # Install pip packages (uv already installed in base image)
+  RUN uv pip install --system --no-cache \
+      --index-url https://pypi.tuna.tsinghua.edu.cn/simple \
+      -e "." albumentations faster-coco-eval && \
+      rm -rf tmp /root/.config/Ultralytics/persistent_cache.json
 
 # Usage --------------------------------------------------------------------------------------------------------------
 
