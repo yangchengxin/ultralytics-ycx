@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git config *)"
+      "Bash(git config *)",
+      "Bash(python -c ' *)",
+      "WebSearch",
+      "WebFetch(domain:docs.ultralytics.com)",
+      "WebFetch(domain:www.mdpi.com)",
+      "Bash(nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv)",
+      "Bash(timeout 20 curl -sIL https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n-pose.pt)",
+      "Bash(python *)",
+      "Bash(python3 -m py_compile download_weights.py)",
+      "Bash(python3 download_weights.py --list)",
+      "Bash(python3 download_weights.py -t pose depth -s all --list)"
     ]
   }
 }
