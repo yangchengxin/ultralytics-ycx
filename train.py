@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 
 # 加载一个预训练的 YOLO26n 模型
-model = YOLO("yolo26n.pt")
+model = YOLO("yolo26n-pose.pt")
 
 # # 在 COCO8 数据集上训练模型 100 个周期
 # train_results = model.train(
