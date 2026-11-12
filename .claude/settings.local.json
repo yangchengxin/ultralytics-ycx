@@ -11,7 +11,14 @@
       "Bash(python *)",
       "Bash(python3 -m py_compile download_weights.py)",
       "Bash(python3 download_weights.py --list)",
-      "Bash(python3 download_weights.py -t pose depth -s all --list)"
+      "Bash(python3 download_weights.py -t pose depth -s all --list)",
+      "Bash(dot -V)",
+      "Bash(python3 -c \"import matplotlib; print\\('mpl', matplotlib.__version__\\)\")",
+      "Bash(python3 -c \"import PIL; print\\('PIL', PIL.__version__\\)\")",
+      "Bash(python3 -c \"import cairosvg; print\\('cairosvg ok'\\)\")",
+      "Bash(fc-list)",
+      "Bash(fc-list :lang=zh)",
+      "Bash(python3 *)"
     ]
   }
 }
